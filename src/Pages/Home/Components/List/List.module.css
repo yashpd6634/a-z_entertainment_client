@@ -1,0 +1,44 @@
+.list {
+    width: 100%;
+    margin-top: 1rem;
+
+    .listTitle {
+        color: white;
+        font-size: 2rem;
+        font-weight: 500;
+        margin-left: 5rem;
+    }
+
+    .wrapper {
+        position: relative;
+        .sliderArrow {
+            width: 5rem;
+            height: 100%;
+            background-color: rgba(22, 22, 22, 0.5);
+            color: white;
+            position: absolute;
+            z-index: 99;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            cursor: pointer;
+
+            &.left {
+                left: 0;
+            }
+
+            &.right {
+                right: 0;
+            }
+        }
+
+        .container {
+            margin-left: 5rem;
+            display: flex;
+            width: max-content;
+            margin-top: 1rem;
+            transform: translateX(0rem);
+            transition: all 1s ease;
+        }
+    }
+}
