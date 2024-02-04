@@ -1,18 +1,18 @@
 .list {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 1.625rem;
 
     .listTitle {
         color: white;
-        font-size: 2rem;
+        font-size: 1.25rem;
         font-weight: 500;
-        margin-left: 5rem;
+        margin-left: 3.125rem;
     }
 
     .wrapper {
         position: relative;
         .sliderArrow {
-            width: 5rem;
+            width: 3.125rem;
             height: 100%;
             background-color: rgba(22, 22, 22, 0.5);
             color: white;
@@ -33,10 +33,10 @@
         }
 
         .container {
-            margin-left: 5rem;
+            margin-left: 3.125rem;
             display: flex;
             width: max-content;
-            margin-top: 1rem;
+            margin-top: 1.625rem;
             transform: translateX(0rem);
             transition: all 1s ease;
         }

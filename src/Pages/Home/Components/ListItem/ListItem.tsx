@@ -5,8 +5,9 @@ import { useState } from "react"
 const ListItem: React.FC<{index: number}> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const myInlineStyle: any = {
-    left: `${isHovered && props.index * 13 - 2.88 + props.index * 0.5}rem`
+    left: `${isHovered ? (props.index * 14.0625 - 3.125 + props.index * 0.3125) : 0}rem`
   };
+  console.log(myInlineStyle.left);
 
   const trailer =
     "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
@@ -34,7 +35,8 @@ const ListItem: React.FC<{index: number}> = (props) => {
                     <span>1999</span>
                 </div>
                 <div className={classes.desc}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos corrupti vitae reprehenderit in, soluta voluptas sapiente eum.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Praesentium hic rem eveniet error possimus, neque ex doloribus.
                 </div>
                 <div className={classes.genre}>
                     Action

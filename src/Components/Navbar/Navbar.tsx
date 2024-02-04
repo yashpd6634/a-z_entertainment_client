@@ -1,6 +1,7 @@
 import { ArrowDropDown, Notifications, Search } from "@mui/icons-material"
 import clasess from "./Navbar.module.css"
 import { useState } from "react"
+import styled from 'styled-components';
 
 const Navbar = () => {
 
@@ -11,12 +12,12 @@ const Navbar = () => {
         return () => (window.onscroll = null);
     }
     const navbar: string = `${clasess.navbar} ${isScrolled ? clasess.scrolled : ""}`;
-
+    console.log(isScrolled);
   return (
     <div className={navbar}>
         <div className={clasess.container}>
             <div className={clasess.left}>
-                <img src="https://scontent.fbho4-1.fna.fbcdn.net/v/t39.30808-6/300113770_172427958655823_271369692906077129_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=Gz_ZnRjOBYgAX9uIhxq&_nc_ht=scontent.fbho4-1.fna&oh=00_AfBCDxZ_P7WJ4T3efl9HgdlGL437D5VLTm9n0XPKfWRCqQ&oe=65A91372" alt="" />
+                <StyledSpan className={clasess.logo}>A-Z Entertainment</StyledSpan>
                 <span>Homepage</span>
                 <span>Series</span>
                 <span>Movies</span>
@@ -40,5 +41,11 @@ const Navbar = () => {
     </div>
   )
 }
+
+const StyledSpan = styled.span`
+  font-family: 'Lobster', cursive;
+  /* Add other styles as needed */
+`;
+
 
 export default Navbar
