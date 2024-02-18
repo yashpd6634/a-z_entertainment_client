@@ -1,51 +1,91 @@
-import { Add, PlayArrow, ThumbDownOutlined, ThumbUpOutlined } from "@mui/icons-material"
-import classes from "./ListItem.module.css"
-import { useState } from "react"
+import {
+  Add,
+  PlayArrow,
+  ThumbDownOutlined,
+  ThumbUpOutlined,
+} from "@mui/icons-material";
+import classes from "./ListItem.module.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import YouTube from "react-youtube";
+import ReactPlayer from "react-player";
+import { Link, useNavigate } from "react-router-dom";
 
-const ListItem: React.FC<{index: number}> = (props) => {
+const ListItem: React.FC<{ index: number; item: any }> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [video, setVideo] = useState<any>({});
   const myInlineStyle: any = {
-    left: `${isHovered ? (props.index * 14.0625 - 3.125 + props.index * 0.3125) : 0}rem`
+    left: `${
+      isHovered ? props.index * 14.0625 - 3.125 + props.index * 0.3125 : 0
+    }rem`,
   };
   console.log(myInlineStyle.left);
 
-  const trailer =
-    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
+  const navigate = useNavigate();
+  const handlePause = () => {
+    navigate("/watch", { state: { video: video } });
+  };
 
+  useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get("/videos/" + props.item, {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmY0NWQ0ODdiZTYzYTEyZTI2MTE4NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNzYzMjU3MywiZXhwIjoxNzA4MDY0NTczfQ.ayKWGNf_RbohRBHu51RAwFw9NhNCKsxeI3tLLSWLKsA",
+          },
+        });
+        setVideo(res.data);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovie();
+  }, [props.item]);
 
   return (
-    <div style={myInlineStyle} className={classes.listItem} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-         <img
-            src="https://occ-0-1723-92.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABU7D36jL6KiLG1xI8Xg_cZK-hYQj1L8yRxbQuB0rcLCnAk8AhEK5EM83QI71bRHUm0qOYxonD88gaThgDaPu7NuUfRg.jpg?r=4ee"
-            alt=""
-         />
-         {isHovered && (
-            <>
-            <video src={trailer} autoPlay={true} loop />
+    <Link to="/watch" state={{ video: video }}>
+      <div
+        style={myInlineStyle}
+        className={classes.listItem}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <img src={video?.imgThumbnail} alt="" />
+        {isHovered && (
+          <>
+            {/* <video src={video?.trailer} autoPlay={true} loop /> */}
+            <ReactPlayer
+              url={video?.trailer}
+              width="100%"
+              height="50%"
+              className={classes.video}
+              loop
+              muted
+              playing
+              onPause={handlePause}
+            />
             <div className={classes.itemInfo}>
-                <div className={classes.icons}>
-                    <PlayArrow className={classes.icon}/>
-                    <Add className={classes.icon}/>
-                    <ThumbUpOutlined className={classes.icon}/>
-                    <ThumbDownOutlined className={classes.icon}/>
-                </div>
-                <div className={classes.itemInfoTop}>
-                    <span>1 hour 14 mins</span>
-                    <span className={classes.limit}>+16</span>
-                    <span>1999</span>
-                </div>
-                <div className={classes.desc}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Praesentium hic rem eveniet error possimus, neque ex doloribus.
-                </div>
-                <div className={classes.genre}>
-                    Action
-                </div>
+              <div className={classes.icons}>
+                <PlayArrow className={classes.icon} />
+                <Add className={classes.icon} />
+                <ThumbUpOutlined className={classes.icon} />
+                <ThumbDownOutlined className={classes.icon} />
+              </div>
+              <div className={classes.itemInfoTop}>
+                <span>{video.duration}</span>
+                <span className={classes.limit}>{video?.limit}</span>
+                <span>{video?.year}</span>
+              </div>
+              <div className={classes.desc}>{video?.desc}</div>
+              <div className={classes.genre}>{video?.genre}</div>
             </div>
-            </>
-          )}
-    </div>
-  )
-}
+          </>
+        )}
+      </div>
+    </Link>
+  );
+};
 
-export default ListItem
+export default ListItem;

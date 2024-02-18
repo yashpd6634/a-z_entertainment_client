@@ -6,7 +6,7 @@ const Featured: React.FC<{type?: string}> = (props) => {
     <div className={classes.featured}>
         {props.type && (
             <div className={classes.category}>
-                <span>{props.type === "movie" ? "Movies" : "Series"}</span>
+                <span>{props.type === "movies" ? "Movies" : "Series"}</span>
                 <select name="genre" id="genre">
                     <option>Genre</option>
                     <option value="adventure">Adventure</option>
