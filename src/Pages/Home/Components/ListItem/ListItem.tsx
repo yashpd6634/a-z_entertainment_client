@@ -32,7 +32,7 @@ const ListItem: React.FC<{ index: number; item: any }> = (props) => {
         const res = await axios.get("/videos/" + props.item, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmY0NWQ0ODdiZTYzYTEyZTI2MTE4NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNzYzMjU3MywiZXhwIjoxNzA4MDY0NTczfQ.ayKWGNf_RbohRBHu51RAwFw9NhNCKsxeI3tLLSWLKsA",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmY0NWQ0ODdiZTYzYTEyZTI2MTE4NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwODIyODAzNSwiZXhwIjoxNzA4NjYwMDM1fQ.ucZDCLt5LoycjPTGeMj1yo-tSfiktB1FpUSLj3Cd4Ho",
           },
         });
         setVideo(res.data);

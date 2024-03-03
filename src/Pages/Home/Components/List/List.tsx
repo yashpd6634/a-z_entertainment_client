@@ -18,7 +18,7 @@ const List = (props: any) => {
       setSlideNumber(slideNumber - 1);
       let distance = listRef.current.getBoundingClientRect().x / 16 - 3.125;
       listRef.current.style.transform = `translateX(${14.375 + distance}rem)`;
-    } else if (direction === "right" && listRef.current && slideNumber < 13) {
+    } else if (direction === "right" && listRef.current && slideNumber < 7) {
       setSlideNumber(slideNumber + 1);
       let distance = listRef.current.getBoundingClientRect().x / 16 - 3.125;
       listRef.current.style.transform = `translateX(${-14.375 + distance}rem)`;

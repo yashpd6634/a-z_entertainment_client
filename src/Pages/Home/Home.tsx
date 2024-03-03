@@ -18,7 +18,7 @@ const Home: React.FC<{ type?: string }> = (props) => {
           {
             headers: {
               token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmY0NWQ0ODdiZTYzYTEyZTI2MTE4NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNzYzMjU3MywiZXhwIjoxNzA4MDY0NTczfQ.ayKWGNf_RbohRBHu51RAwFw9NhNCKsxeI3tLLSWLKsA",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmY0NWQ0ODdiZTYzYTEyZTI2MTE4NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwOTM1OTM1OSwiZXhwIjoxNzA5NzkxMzU5fQ.V2CpsQgndyzr66jS8sG_5O0nXSakz0-CRCNtSRNdhF4",
             },
           }
         );
