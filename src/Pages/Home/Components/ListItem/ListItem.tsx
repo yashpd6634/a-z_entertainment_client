@@ -5,18 +5,20 @@ import {
   ThumbUpOutlined,
 } from "@mui/icons-material";
 import classes from "./ListItem.module.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import YouTube from "react-youtube";
 import ReactPlayer from "react-player";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../../authContext/AuthContext";
+import { VideoOutput } from "./ListItem.type";
 
-const ListItem: React.FC<{ index: number; item: any }> = (props) => {
+const ListItem: React.FC<{ index: number; item: string }> = ({index, item}) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [video, setVideo] = useState<any>({});
+  const {state} = useContext(AuthContext);
+  const [video, setVideo] = useState<VideoOutput>({} as VideoOutput);
   const myInlineStyle: any = {
     left: `${
-      isHovered ? props.index * 14.0625 - 3.125 + props.index * 0.3125 : 0
+      isHovered ? index * 14.0625 - 3.125 + index * 0.3125 : 0
     }rem`,
   };
   console.log(myInlineStyle.left);
@@ -29,10 +31,9 @@ const ListItem: React.FC<{ index: number; item: any }> = (props) => {
   useEffect(() => {
     const getMovie = async () => {
       try {
-        const res = await axios.get("/videos/" + props.item, {
+        const res = await axios.get("/videos/" + item, {
           headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmY0NWQ0ODdiZTYzYTEyZTI2MTE4NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwODIyODAzNSwiZXhwIjoxNzA4NjYwMDM1fQ.ucZDCLt5LoycjPTGeMj1yo-tSfiktB1FpUSLj3Cd4Ho",
+            token: "Bearer " + state.user?.accessToken,
           },
         });
         setVideo(res.data);
@@ -42,7 +43,7 @@ const ListItem: React.FC<{ index: number; item: any }> = (props) => {
       }
     };
     getMovie();
-  }, [props.item]);
+  }, [state.user?.accessToken,item]);
 
   return (
     <Link to="/watch" state={{ video: video }}>

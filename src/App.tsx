@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import "./App.css";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
@@ -9,9 +10,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { AuthContext } from "./authContext/AuthContext";
 
 function App() {
-  const user = true;
+  const user = useContext(AuthContext);
   return (
     <Router>
       <Routes>

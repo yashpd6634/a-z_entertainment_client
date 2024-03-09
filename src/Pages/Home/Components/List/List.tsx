@@ -4,9 +4,10 @@ import {
 } from "@mui/icons-material";
 import classes from "./List.module.css";
 import ListItem from "../ListItem/ListItem";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { ListOutput } from "./List.type";
 
-const List = (props: any) => {
+const List: React.FC<{ list: ListOutput }> = ({ list }) => {
   const listRef = useRef<HTMLDivElement>(null);
   const [isMoved, setIsMoved] = useState<boolean>(false);
   const [slideNumber, setSlideNumber] = useState<number>(0);
@@ -30,7 +31,7 @@ const List = (props: any) => {
 
   return (
     <div className={classes.list}>
-      <span className={classes.listTitle}>{props.list.title}</span>
+      <span className={classes.listTitle}>{list.title}</span>
       <div className={classes.wrapper}>
         <ArrowBackIosOutlined
           className={leftSlider}
@@ -38,7 +39,7 @@ const List = (props: any) => {
           style={{ display: `${!isMoved ? "none" : ""}` }}
         />
         <div className={classes.container} ref={listRef}>
-          {props.list.content.map((item: any, i: number) => (
+          {list.content.map((item: string, i: number) => (
             <ListItem index={i} item={item} />
           ))}
         </div>

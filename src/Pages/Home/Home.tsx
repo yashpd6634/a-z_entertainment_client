@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import Featured from "./Components/Featured/Featured";
 import List from "./Components/List/List";
 import classes from "./Home.module.css";
 import axios from "axios";
+import { AuthContext } from "../../authContext/AuthContext";
+import { ListOutput } from "./Components/List/List.type";
 
-const Home: React.FC<{ type?: string }> = (props) => {
-  const [lists, setLists] = useState<any>([]);
-  const [genre, setGenre] = useState(null);
+const Home: React.FC<{ type?: string }> = ({type}) => {
+  const [lists, setLists] = useState<ListOutput[]>([]);
+  const [genre, setGenre] = useState<string>("");
+  const { state } = useContext(AuthContext);
   useEffect(() => {
     const getRandomList = async () => {
       try {
         const res = await axios.get(
-          `lists${props.type ? "?type=" + props.type : ""}${
+          `lists${type ? "?type=" + type : ""}${
             genre ? "?&genre=" + genre : ""
           }`,
           {
             headers: {
-              token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmY0NWQ0ODdiZTYzYTEyZTI2MTE4NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwOTM1OTM1OSwiZXhwIjoxNzA5NzkxMzU5fQ.V2CpsQgndyzr66jS8sG_5O0nXSakz0-CRCNtSRNdhF4",
+              token: "Bearer " + state.user?.accessToken,
             },
           }
         );
-        console.log(res);
         setLists(res.data);
       } catch (err) {
         console.log(err);
@@ -30,14 +31,14 @@ const Home: React.FC<{ type?: string }> = (props) => {
     };
 
     getRandomList();
-  }, [props.type, genre]);
+  }, [type, genre, state.user?.accessToken]);
 
   console.log(lists);
   return (
     <div className={classes.home}>
       <Navbar />
-      <Featured type={props?.type} />
-      {lists.map((list: any) => (
+      <Featured type={type} setGenre={setGenre} />
+      {lists.map((list: ListOutput) => (
         <List list={list} />
       ))}
     </div>
