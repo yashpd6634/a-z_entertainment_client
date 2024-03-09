@@ -9,17 +9,18 @@ import { ListOutput } from "./List.type";
 
 const List: React.FC<{ list: ListOutput }> = ({ list }) => {
   const listRef = useRef<HTMLDivElement>(null);
-  const [isMoved, setIsMoved] = useState<boolean>(false);
+  const [showLeftArrow, setShowLeftArrow] = useState<boolean>(false);
+  const [showRightArrow, setShowRightArrow] = useState<boolean>(true);
   const [slideNumber, setSlideNumber] = useState<number>(0);
+  const sizeOfList: number = list.content.length;
 
   const handleClick = (direction: string) => {
-    setIsMoved(true);
 
     if (direction === "left" && listRef.current && slideNumber > 0) {
       setSlideNumber(slideNumber - 1);
       let distance = listRef.current.getBoundingClientRect().x / 16 - 3.125;
       listRef.current.style.transform = `translateX(${14.375 + distance}rem)`;
-    } else if (direction === "right" && listRef.current && slideNumber < 7) {
+    } else if (direction === "right" && listRef.current && slideNumber < 3) {
       setSlideNumber(slideNumber + 1);
       let distance = listRef.current.getBoundingClientRect().x / 16 - 3.125;
       listRef.current.style.transform = `translateX(${-14.375 + distance}rem)`;
@@ -36,7 +37,7 @@ const List: React.FC<{ list: ListOutput }> = ({ list }) => {
         <ArrowBackIosOutlined
           className={leftSlider}
           onClick={() => handleClick("left")}
-          style={{ display: `${!isMoved ? "none" : ""}` }}
+          style={{ display: `${!showLeftArrow ? "none" : ""}` }}
         />
         <div className={classes.container} ref={listRef}>
           {list.content.map((item: string, i: number) => (
@@ -46,6 +47,7 @@ const List: React.FC<{ list: ListOutput }> = ({ list }) => {
         <ArrowForwardIosOutlined
           className={rightSlider}
           onClick={() => handleClick("right")}
+          style={{ display: `${!showRightArrow ? "none" : ""}` }}
         />
       </div>
     </div>

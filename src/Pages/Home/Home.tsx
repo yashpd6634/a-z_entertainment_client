@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../../authContext/AuthContext";
 import { ListOutput } from "./Components/List/List.type";
 
-const Home: React.FC<{ type?: string }> = ({type}) => {
+const Home: React.FC<{ type?: string }> = ({ type }) => {
   const [lists, setLists] = useState<ListOutput[]>([]);
   const [genre, setGenre] = useState<string>("");
   const { state } = useContext(AuthContext);
@@ -16,7 +16,7 @@ const Home: React.FC<{ type?: string }> = ({type}) => {
       try {
         const res = await axios.get(
           `lists${type ? "?type=" + type : ""}${
-            genre ? "?&genre=" + genre : ""
+            genre ? "&genre=" + genre : ""
           }`,
           {
             headers: {

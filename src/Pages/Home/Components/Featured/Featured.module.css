@@ -42,9 +42,16 @@
     .itemInfo {
       display: flex;
       flex-direction: column;
+      margin-left: 1rem;
+
+      .title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
 
       .icons {
         display: flex;
+        margin-bottom: 0.5rem;
 
         .icon {
           border: 0.125rem solid white;
@@ -57,7 +64,7 @@
       .itemInfoTop {
         display: flex;
         align-items: center;
-        margin-bottom: 0.625rem;
+        margin-bottom: 0.8rem;
         font-size: 1rem;
         font-weight: 600;
         color: gray;
@@ -71,7 +78,7 @@
 
       .desc {
         font-size: 1.2rem;
-        margin: 0.8rem 0;
+        margin-bottom: 2rem;
       }
 
       .genre {
@@ -81,11 +88,13 @@
     }
 
     img {
-      width: 25rem;
+      width: 12rem;
+      margin-bottom: 1.5rem;
     }
 
     .buttons {
       display: flex;
+      margin-left: 1rem;
 
       button {
         padding: 0.625rem 1.25rem;
