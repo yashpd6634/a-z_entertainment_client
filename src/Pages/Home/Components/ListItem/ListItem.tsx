@@ -22,7 +22,6 @@ const ListItem: React.FC<{ index: number; item: string }> = ({
   const myInlineStyle: any = {
     left: `${isHovered ? index * 14.0625 - 3.125 + index * 0.3125 : 0}rem`,
   };
-  console.log(myInlineStyle.left);
 
   const navigate = useNavigate();
   const handlePause = () => {
@@ -38,7 +37,6 @@ const ListItem: React.FC<{ index: number; item: string }> = ({
           },
         });
         setVideo(res.data);
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -47,7 +45,11 @@ const ListItem: React.FC<{ index: number; item: string }> = ({
   }, [state.user?.accessToken, item]);
 
   return (
-    <Link to="/watch" state={{ video: video }} style={{ textDecoration: 'none' }}>
+    <Link
+      to="/watch"
+      state={{ video: video }}
+      style={{ textDecoration: "none" }}
+    >
       <div
         style={myInlineStyle}
         className={classes.listItem}

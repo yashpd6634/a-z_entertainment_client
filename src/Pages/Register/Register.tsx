@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import classes from "./Register.module.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,6 @@ const Register = () => {
     e.preventDefault();
     const username = usernameRef.current?.value || "";
     const password = passwordRef.current?.value || "";
-    console.log(usernameRef.current?.value || "");
     console.log(`username - ${username}`);
     try {
       await axios.post("auth/register", { email, username, password });
@@ -31,12 +31,10 @@ const Register = () => {
     <div className={classes.register}>
       <div className={classes.top}>
         <div className={classes.wrapper}>
-          <img
-            className={classes.logo}
-            src="https://scontent.fbho4-1.fna.fbcdn.net/v/t39.30808-6/300113770_172427958655823_271369692906077129_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=Gz_ZnRjOBYgAX9uIhxq&_nc_ht=scontent.fbho4-1.fna&oh=00_AfBCDxZ_P7WJ4T3efl9HgdlGL437D5VLTm9n0XPKfWRCqQ&oe=65A91372"
-            alt=""
-          />
-          <button className={classes.loginButton}>Sign In</button>
+          <StyledSpan className={classes.logo}>A-Z Entertainment</StyledSpan>
+          <Link to="/login" className={classes.loginButton}>
+            <span>Sign In</span>
+          </Link>
         </div>
       </div>
       <div className={classes.container}>
@@ -65,5 +63,10 @@ const Register = () => {
     </div>
   );
 };
+
+const StyledSpan = styled.span`
+  font-family: "Lobster", cursive;
+  /* Add other styles as needed */
+`;
 
 export default Register;

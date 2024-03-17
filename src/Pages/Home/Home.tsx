@@ -39,7 +39,7 @@ const Home: React.FC<{ type?: string }> = ({ type }) => {
       <Navbar />
       <Featured type={type} setGenre={setGenre} />
       {lists.map((list: ListOutput) => (
-        <List list={list} />
+        <List list={list} key={list._id} />
       ))}
     </div>
   );

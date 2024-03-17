@@ -11,25 +11,27 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthContext } from "./authContext/AuthContext";
+import axios from "axios";
 
 function App() {
-  const user = useContext(AuthContext);
+  axios.defaults.baseURL = "http://localhost:8000/api/";
+  const {state} = useContext(AuthContext);
   return (
     <Router>
       <Routes>
         <Route
           path="/"
-          element={user ? <Home /> : <Navigate to="/register" />}
+          element={state.user ? <Home /> : <Navigate to="/register" />}
         />
         <Route
           path="/register"
-          element={!user ? <Register /> : <Navigate to="/" />}
+          element={!state.user ? <Register /> : <Navigate to="/" />}
         />
         <Route
           path="/login"
-          element={!user ? <Login /> : <Navigate to="/" />}
+          element={!state.user ? <Login /> : <Navigate to="/" />}
         />
-        {user && (
+        {state.user && (
           <>
             <Route path="/movies" element={<Home type="movie" />} />
             <Route path="/series" element={<Home type="series" />} />

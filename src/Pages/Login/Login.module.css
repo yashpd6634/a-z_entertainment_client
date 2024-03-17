@@ -70,7 +70,8 @@
 
       span {
         color: lightgray;
-        b {
+        .signUp {
+          text-decoration: none;
           color: white;
         }
       }

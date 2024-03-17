@@ -2,15 +2,21 @@ import { useContext, useState } from "react";
 import classes from "./Login.module.css";
 import { AuthContext } from "../../authContext/AuthContext";
 import { login } from "../../authContext/ApiCalls";
+import { Link, useNavigate } from "react-router-dom";
+import { UserOutput } from "../../authContext/AuthActions";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { dispatch} = useContext(AuthContext);
+  const {state, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    login({email, password}, dispatch);
+    const res: UserOutput = await login({ email, password }, dispatch);
+    console.log(res);
+    if(res)
+    navigate("/");
   };
   return (
     <div className={classes.login}>
@@ -42,7 +48,10 @@ const Login = () => {
             Sign In
           </button>
           <span className={classes.span}>
-            New to Netflix? <b className={classes.b}>Sign up now.</b>
+            New to Netflix?
+            <Link to="/register" className={classes.signUp}>
+              <b> Sign up now.</b>
+            </Link>
           </span>
           <small>
             This page is protected by Google reCAPTCHA to ensure you're not a

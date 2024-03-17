@@ -1,7 +1,7 @@
 .listItem {
   display: flex;
   flex-direction: column;
-  width: 17.5rem;
+  width: 20rem;
   height: max-content;
   background-color: #0b0b0b;
   margin-right: 0.5rem;

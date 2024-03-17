@@ -9,7 +9,7 @@ import { ListOutput } from "./List.type";
 
 const List: React.FC<{ list: ListOutput }> = ({ list }) => {
   const listRef = useRef<HTMLDivElement>(null);
-  const [showLeftArrow, setShowLeftArrow] = useState<boolean>(false);
+  const [showLeftArrow, setShowLeftArrow] = useState<boolean>(true);
   const [showRightArrow, setShowRightArrow] = useState<boolean>(true);
   const [slideNumber, setSlideNumber] = useState<number>(0);
   const sizeOfList: number = list.content.length;
@@ -19,11 +19,11 @@ const List: React.FC<{ list: ListOutput }> = ({ list }) => {
     if (direction === "left" && listRef.current && slideNumber > 0) {
       setSlideNumber(slideNumber - 1);
       let distance = listRef.current.getBoundingClientRect().x / 16 - 3.125;
-      listRef.current.style.transform = `translateX(${14.375 + distance}rem)`;
+      listRef.current.style.transform = `translateX(${82 + distance}rem)`;
     } else if (direction === "right" && listRef.current && slideNumber < 3) {
       setSlideNumber(slideNumber + 1);
       let distance = listRef.current.getBoundingClientRect().x / 16 - 3.125;
-      listRef.current.style.transform = `translateX(${-14.375 + distance}rem)`;
+      listRef.current.style.transform = `translateX(${-82 + distance}rem)`;
     }
   };
 
